@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.AreaDao" >
+<!-- resultType="com.example.demo.entity.Area-->
+    <select id="queryArea" resultType="com.example.demo.entity.Area">
+     SELECT  area_id,area_name,priority,create_time,last_edit_time
+     FROM  tb_area
+     ORDER  BY priority
+     DESC
+    </select>
+    <!-- 查询单条数据方法 -->
+    <select id="queryAreaById" parameterType="java.lang.Integer" resultType="com.example.demo.entity.Area">
+      SELECT  area_id,area_name,priority,create_time,last_edit_time
+      FROM  tb_area where area_id=#{areaId}
+
+    </select>
+    <!-- 插入数据-->
+    <insert id="insertArea" useGeneratedKeys="true" keyProperty="areaId" keyColumn="area_id" parameterType="com.example.demo.entity.Area">
+        INSERT  INTO  tb_area(area_name,priority,create_time,last_edit_time)
+        VALUES (#{areaName},#{priority},#{createTime},#{lastEditTime})
+
+    </insert>
+    <!-- 更新数据  -->
+    <update id="updateArea" parameterType="com.example.demo.entity.Area">
+        UPDATE  tb_area
+        <set>
+            <if test="areaName!=null">area_name=#{areaName} </if>
+            <if test="priority!=null">priority=#{priority} </if>
+            <if test="createTime!=null">create_time=#{createTime} </if>
+            <if test="lastEditTime!=null">last_edit_time=#{lastEditTime} </if>
+        </set>
+      <where>
+          area_id=#{areaId}
+      </where>
+    </update>
+    <!-- 删除数据 -->
+    <delete id="deleteArea">
+    DELETE  area_id,area_name,priority,create_time,last_edit_time
+    FROM tb_area
+    WHERE  area_id = #{areaId}
+
+    </delete>
+
+</mapper>
