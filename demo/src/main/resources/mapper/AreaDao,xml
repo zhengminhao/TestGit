@@ -26,9 +26,9 @@
     <update id="updateArea" parameterType="com.example.demo.entity.Area">
         UPDATE  tb_area
         <set>
-            <if test="areaName!=null">area_name=#{areaName} </if>
-            <if test="priority!=null">priority=#{priority} </if>
-            <if test="createTime!=null">create_time=#{createTime} </if>
+            <if test="areaName!=null">area_name=#{areaName},</if>
+            <if test="priority!=null">priority=#{priority}, </if>
+           <!-- <if test="createTime!=null">create_time=#{createTime} </if> -->
             <if test="lastEditTime!=null">last_edit_time=#{lastEditTime} </if>
         </set>
       <where>
@@ -37,7 +37,7 @@
     </update>
     <!-- 删除数据 -->
     <delete id="deleteArea">
-    DELETE  area_id,area_name,priority,create_time,last_edit_time
+    DELETE 
     FROM tb_area
     WHERE  area_id = #{areaId}
 
